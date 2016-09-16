@@ -175,6 +175,32 @@ module.exports = function(options) {
         {
           test: /\.(jpg|png|gif)$/,
           loader: 'file'
+        },
+        /* SASS support. See here: https://github.com/AngularClass/angular2-webpack-starter/wiki/How-to-include-SCSS-in-components
+
+           Add to your component like this:
+             @Component({
+              styleUrls: ['./filename.scss'],
+             })
+
+           If you want global CSS support then on the top level component (likely app.component.ts) remove encapsulation and include the SCSS:
+
+              import {ViewEncapsulation} from '@angular/core';
+
+              @Component({
+                selector: 'app',
+                styleUrls: ['./bootstrap.scss'],
+                encapsulation: ViewEncapsulation.None,
+                template: ``
+              })
+              class App {}
+
+
+        */
+        {
+          test: /\.scss$/,
+          exclude: /node_modules/,
+          loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
         }
       ],
 
